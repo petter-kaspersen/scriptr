@@ -17,9 +17,6 @@ export default ({children, activePage = ''}) => {
       <header className="p-6 bg-gray-900 text-white flex flex-row">
         <nav className="flex flex-row ml-2">
           <ul className="flex flex-row main--nav">
-            <li className="px-5 py-1">
-              <a href="/admin">Home</a>
-            </li>
             <li
               className={`px-5 py-1 ${
                 activePage == 'packages' ? 'text-blue-200 underline' : ''

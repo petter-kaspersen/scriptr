@@ -113,46 +113,6 @@ function AdminPackages({packages}) {
                   </td>
                 </tr>
               ))}
-              {/*   <tr>
-              <td class="border px-4 py-2">react</td>
-              <td class="border px-4 py-2">~0.0.0</td>
-              <td class="border px-4 py-2">
-                <a className="text-blue-400 underline" href="https://test.com">
-                  https://test.com
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td class="border px-4 py-2">react-dom</td>
-              <td class="border px-4 py-2">~0.0.0</td>
-              <td class="border px-4 py-2">
-                <a
-                  className="text-blue-400 underline"
-                  a
-                  href="https://test.com"
-                >
-                  https://test.com
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td class="border px-4 py-2">next</td>
-              <td class="border px-4 py-2">~0.0.0</td>
-              <td class="border px-4 py-2">
-                <a className="text-blue-400 underline" href="https://test.com">
-                  https://test.com
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td class="border px-4 py-2">tailwindcss</td>
-              <td class="border px-4 py-2">~0.0.0</td>
-              <td class="border px-4 py-2">
-                <a className="text-blue-400 underline" href="https://test.com">
-                  https://test.com
-                </a>
-              </td>
-            </tr> */}
             </tbody>
           </table>
         )}
