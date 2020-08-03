@@ -94,6 +94,18 @@ body {
   }
 }
 
+.delete--icon {
+  @apply w-auto h-8 py-2 px-4 rounded-md shadow-md mr-4 flex items-center justify-center bg-red-500;
+
+  span {
+    @apply text-white uppercase font-bold text-sm;
+  }
+
+  &:hover {
+    @apply cursor-pointer bg-red-400;
+  }
+}
+
 .cancel--icon {
   @apply w-8 h-8 rounded-full shadow-md mr-4 flex items-center justify-center bg-yellow-400 transform rotate-45;
 

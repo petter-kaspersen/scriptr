@@ -5,8 +5,6 @@ import AdminLayout from '../../src/client/layouts/AdminLayout';
 import {useDropzone} from 'react-dropzone';
 import apiFetch from '../../src/util/api-fetch';
 
-import RunIcon from '../../src/client/icons/RunIcon';
-
 function AdminScriptView({scripts = []}) {
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles
@@ -72,50 +70,24 @@ function AdminScriptView({scripts = []}) {
                         ? 'Never'
                         : new Date(script.config.lastRan)}
                     </td>
-                    <td className="border px-4 py-2">
+                    <td className="border px-4 py-2 flex flex-row">
                       <div className="run--icon">
                         <span>Run script</span>
+                      </div>
+                      <div className="delete--icon">
+                        <span>Delete script</span>
                       </div>
                     </td>
                   </tr>
                 );
               })}
             </tbody>
-            {/*           <tbody>
-            {sortedPackages.length == 0 && (
-              <tr>
-                <td className="px-4 py-2">No packages installed :-(</td>
-              </tr>
-            )}
-            {sortedPackages.map((pck) => (
-              <tr>
-                <td className="border px-4 py-2">{pck}</td>
-                <td className="border px-4 py-2">{packages[pck]}</td>
-                <td className="border px-4 py-2">
-                  <a
-                    className="text-blue-400 underline"
-                    href={`https://www.npmjs.com/package/${pck}`}
-                    target="_blank"
-                  >
-                    https://www.npmjs.com/package/{pck}
-                  </a>
-                </td>
-              </tr>
-            ))} */}
           </table>
         )}
       </div>
     </AdminLayout>
   );
 }
-/*
-export default () => {
-  return (
-    <AdminLayout activePage="settings">
-
-    </AdminLayout>
-  )
-} */
 
 AdminScriptView.getInitialProps = async (ctx) => {
   const scripts = await apiFetch('scripts');

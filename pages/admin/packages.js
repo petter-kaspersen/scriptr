@@ -6,39 +6,18 @@ import apiFetch from '../../src/util/api-fetch';
 import LargePlus from '../../src/client/icons/LargePlus';
 
 function AdminPackages({packages}) {
-  /*   packages = {
-    '@zeit/next-sass': '^1.0.1',
-    dotenv: '^8.2.0',
-    'isomorphic-fetch': '^2.2.1',
-    koa: '^2.13.0',
-    'koa-bodyparser': '^4.3.0',
-    'koa-mount': '^4.0.0',
-    'koa-router': '^9.1.0',
-    'koa-static': '^5.0.0',
-    next: '^9.5.1',
-    'node-sass': '^4.14.1',
-    'postcss-import': '^12.0.1',
-    prismjs: '^1.20.0',
-    react: '^16.13.1',
-    'react-dom': '^16.13.1',
-    'react-simple-code-editor': '^0.11.0',
-    rimraf: '^3.0.2',
-    sass: '^1.26.10',
-  }; */
-  const [code, setCode] = useState('');
-
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortedPackages, setSortedPackages] = useState(Object.keys(packages));
+  const [sortedPackages, setSortedPackages] = useState(packages);
 
   const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
     if (searchTerm === '') {
-      setSortedPackages(Object.keys(packages));
+      setSortedPackages(packages);
     } else {
       setSortedPackages(
-        Object.keys(packages).filter((pck) =>
-          pck.toLowerCase().includes(searchTerm.toLowerCase())
+        packages.filter((pck) =>
+          pck.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
     }
@@ -100,15 +79,15 @@ function AdminPackages({packages}) {
               )}
               {sortedPackages.map((pck) => (
                 <tr>
-                  <td className="border px-4 py-2">{pck}</td>
-                  <td className="border px-4 py-2">{packages[pck]}</td>
+                  <td className="border px-4 py-2">{pck.name}</td>
+                  <td className="border px-4 py-2">{pck.version}</td>
                   <td className="border px-4 py-2">
                     <a
                       className="text-blue-400 underline"
-                      href={`https://www.npmjs.com/package/${pck}`}
+                      href={`https://www.npmjs.com/package/${pck.name}`}
                       target="_blank"
                     >
-                      https://www.npmjs.com/package/{pck}
+                      https://www.npmjs.com/package/{pck.name}
                     </a>
                   </td>
                 </tr>
@@ -145,19 +124,11 @@ function ContentBox() {
 }
 
 AdminPackages.getInitialProps = async (ctx) => {
+  const packages = await apiFetch('packages');
+
   return {
-    packages: {},
+    packages: packages,
   };
-  /*   const packages = await apiFetch('packages');
-
-  if (!packages)
-    return {
-      packages: {dependencies: []},
-    };
-
-  return {
-    packages: packages || [],
-  }; */
 };
 
 export default AdminPackages;
