@@ -9,7 +9,8 @@
     "script:new": "node create-script.js",
     "build": "next build",
     "next:dev": "next",
-    "test": "mocha tests/index.js"
+    "test": "mocha tests/index.js",
+    "start": "NODE_ENV=production node server.js"
   },
   "keywords": [],
   "author": "Petter Kaspersen",

@@ -1,7 +1,7 @@
-const config = require('./scriptr.config');
-const getOrCreatePackageFile = require('./src/util/get-or-create-package-file');
-const uninstallPackage = require('./src/util/uninstall-package');
-const removeUserPackage = require('./src/util/remove-user-package');
+const config = require('../scriptr.config');
+const getOrCreatePackageFile = require('../src/util/get-or-create-package-file');
+const uninstallPackage = require('../src/util/uninstall-package');
+const removeUserPackage = require('../src/util/remove-user-package');
 
 (async () => {
   const packages = getOrCreatePackageFile();

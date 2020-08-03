@@ -1,8 +1,8 @@
-const config = require('./scriptr.config');
-const getOrCreatePackageFile = require('./src/util/get-or-create-package-file');
-const installPackage = require('./src/util/install-package');
-const parseInstallMessage = require('./src/util/parse-install-message');
-const addUserPackage = require('./src/util/add-user-package');
+const config = require('../scriptr.config');
+const getOrCreatePackageFile = require('../src/util/get-or-create-package-file');
+const installPackage = require('../src/util/install-package');
+const parseInstallMessage = require('../src/util/parse-install-message');
+const addUserPackage = require('../src/util/add-user-package');
 
 (async () => {
   if (!config.initialPackages)

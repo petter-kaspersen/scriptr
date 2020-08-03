@@ -60,7 +60,7 @@ router.post('/packages/install', async (ctx, next) => {
 
   const existingPackages = getOrCreatePackageFile();
 
-  if (existingPackages.some((pck) => pck.name === name)) {
+  if (existingPackages.some(pck => pck.name === name)) {
     // Already exists
 
     ctx.body = 'Already exists';
@@ -79,7 +79,7 @@ router.delete('/packages/:name', async (ctx, next) => {
 
   const packages = getOrCreatePackageFile();
 
-  const hasPackage = packages.find((x) => x.name == name);
+  const hasPackage = packages.find(x => x.name == name);
 
   if (hasPackage) {
     await uninstallPackage(name);

@@ -1,9 +1,12 @@
 module.exports = function parseInstallMessage(msg) {
   return msg
     .split('\n')
-    .map((m) => {
+    .map(m => {
       if (m.trim().startsWith('+')) {
-        let rawPackage = m.trim().replace('+', '').trim();
+        let rawPackage = m
+          .trim()
+          .replace('+', '')
+          .trim();
 
         const [packageName, version] = rawPackage.split('@');
 
@@ -13,5 +16,5 @@ module.exports = function parseInstallMessage(msg) {
         };
       }
     })
-    .filter((x) => x)[0];
+    .filter(x => x)[0];
 };

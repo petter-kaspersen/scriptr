@@ -7,7 +7,7 @@ module.exports = function removeUserPackage(name) {
 
   const content = JSON.parse(fs.readFileSync(filePath));
 
-  const filteredPackages = content.packages.filter((x) => x.name !== name);
+  const filteredPackages = content.packages.filter(x => x.name !== name);
 
   fs.writeFileSync(
     filePath,

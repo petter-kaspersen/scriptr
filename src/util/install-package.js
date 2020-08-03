@@ -5,7 +5,7 @@ const {exec} = require('child_process');
 module.exports = async function installPackage(name, version) {
   const existingPackages = getOrCreatePackageFile();
 
-  if (existingPackages.some((pck) => pck.name === name)) {
+  if (existingPackages.some(pck => pck.name === name)) {
     // Already exists
 
     return;
