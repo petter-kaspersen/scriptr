@@ -22,7 +22,7 @@ nextApp.prepare().then(() => {
 
 const PORT = process.env.PORT || 3000;
 
-module.exports = app.listen(PORT, (err) => {
+module.exports = app.listen(PORT, err => {
   if (err) throw err;
 
   console.log(`Listening on http://localhost:${PORT}`);

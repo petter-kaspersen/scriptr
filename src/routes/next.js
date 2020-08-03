@@ -10,7 +10,7 @@ function routerNext(app) {
     await next();
   });
 
-  router.get('(.*)', async (ctx) => {
+  router.get('(.*)', async ctx => {
     if (ctx.request.path.indexOf('/api') === 0) {
       await next();
     } else {

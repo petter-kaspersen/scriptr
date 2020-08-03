@@ -14,7 +14,7 @@ module.exports = function getScripts() {
 
   const folders = fs
     .readdirSync(scriptDirectory)
-    .filter((folder) =>
+    .filter(folder =>
       fs.lstatSync(path.join(scriptDirectory, folder)).isDirectory()
     );
 
