@@ -4,3 +4,4 @@ node_modules/
 scripts/**/*
 !scripts/.gitkeep
 .tmp
+user_packages.json
