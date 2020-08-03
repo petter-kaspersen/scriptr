@@ -13,6 +13,10 @@ const getOrCreatePackageFile = require('../util/get-or-create-package-file');
 const addUserPackage = require('../util/add-user-package');
 
 const AdmZip = require('adm-zip');
+const removeUserPackage = require('../util/remove-user-package');
+const uninstallPackage = require('../util/uninstall-package');
+const installPackage = require('../util/install-package');
+const parseInstallMessage = require('../util/parse-install-message');
 
 router.prefix('/api');
 
@@ -56,28 +60,33 @@ router.post('/packages/install', async (ctx, next) => {
 
   const existingPackages = getOrCreatePackageFile();
 
-  if (existingPackages.some(pck => pck.name === name)) {
+  if (existingPackages.some((pck) => pck.name === name)) {
     // Already exists
 
     ctx.body = 'Already exists';
   } else {
-    const installPackage = await new Promise((resolve, reject) => {
-      exec(
-        `npm install ${name} ${dev ? '--save-dev' : '--save'}`,
-        (error, stdout, stderr) => {
-          if (error) {
-            reject('Oh no ', error);
-          }
+    const installedPackage = await installPackage(name);
+    const nameAndVersion = parseInstallMessage(installedPackage);
 
-          resolve(stdout);
-        }
-      );
-    });
+    addUserPackage(nameAndVersion);
 
-    addUserPackage(name);
-
-    ctx.body = installPackage;
+    ctx.body = nameAndVersion;
   }
+});
+
+router.delete('/packages/:name', async (ctx, next) => {
+  const {name} = ctx.params;
+
+  const packages = getOrCreatePackageFile();
+
+  const hasPackage = packages.find((x) => x.name == name);
+
+  if (hasPackage) {
+    await uninstallPackage(name);
+    removeUserPackage(name);
+  }
+
+  ctx.body = 'OK';
 });
 
 module.exports = router;
