@@ -31,6 +31,6 @@ All user installed packages (packages installed through the REST API or the admi
 
 ![Login screen](screenshots/login.png)
 
-![Packages][screenshots/packages.png]
+![Packages](screenshots/packages.png)
 
-![Scripts][screenshots/scripts.png]
+![Scripts](screenshots/scripts.png)
