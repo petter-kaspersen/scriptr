@@ -11,5 +11,6 @@ COPY . .
 EXPOSE 3000
 
 RUN npm run build
+RUN node ./global_scripts/install-default-packages.js
 
 CMD ["npm", "run", "start"]
