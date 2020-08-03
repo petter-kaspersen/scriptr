@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+.next/
+scripts/**/*
+!scripts/.gitkeep
+.tmp
