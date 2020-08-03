@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-module.exports = function addUserPackage(name) {
+module.exports = function addUserPackage({name, version}) {
   const properPath = path.join(__dirname, '..', '..');
   const filePath = path.join(properPath, 'user_packages.json');
 
@@ -11,7 +11,7 @@ module.exports = function addUserPackage(name) {
     filePath,
     JSON.stringify({
       ...content,
-      packages: [...content.packages, {name: name}],
+      packages: [...content.packages, {name: name, version: version}],
     })
   );
 };
