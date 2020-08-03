@@ -1,2 +1,5 @@
-const withSass = require('@zeit/next-sass');
-module.exports = withSass({});
+const scriptrConfig = require('./scriptr.config');
+
+module.exports = {
+  publicRuntimeConfig: scriptrConfig,
+};

@@ -11,19 +11,19 @@ const nextApp = next({
   dev: process.env.NODE_ENV !== 'production',
 });
 
+const app = new Koa();
+
 nextApp.prepare().then(() => {
-  const app = new Koa();
-
-  const PORT = process.env.PORT || 3000;
-
   app.use(bodyParser());
 
   app.use(routes.routes()).use(routes.allowedMethods());
   app.use(nextRouter(nextApp).routes());
+});
 
-  app.listen(PORT, (err) => {
-    if (err) throw err;
+const PORT = process.env.PORT || 3000;
 
-    console.log(`Listening on http://localhost:${PORT}`);
-  });
+module.exports = app.listen(PORT, (err) => {
+  if (err) throw err;
+
+  console.log(`Listening on http://localhost:${PORT}`);
 });

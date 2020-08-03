@@ -2,69 +2,57 @@ import React, {useState, useEffect} from 'react';
 
 import 'isomorphic-fetch';
 
-import '../styles/admin-layout.scss';
-
 import Plus from '../icons/Plus';
+import FilledHeart from '../icons/FilledHeart';
 
-function ExpandableLi({
-  title,
-  addable = false,
-  AddComponent = () => null,
-  children,
-}) {
-  const [expanded, setExpanded] = useState(false);
-  const [adding, setAdding] = useState(false);
+import Link from 'next/link';
 
+import getConfig from 'next/config';
+
+export default ({children, activePage = ''}) => {
+  const {publicRuntimeConfig} = getConfig();
+  console.log(publicRuntimeConfig);
   return (
-    <li className="expandable--li">
-      <div className="header">
-        {addable && (
-          <Plus onClick={() => setAdding(!adding)} width={25} fill="white" />
-        )}
-        <span onClick={() => setExpanded(!expanded)}>{title} ›</span>
-      </div>
-      {adding && <AddComponent />}
-      {expanded && children}
-    </li>
-  );
-}
-
-export default function AdminLayout({packages = {dependencies: []}, children}) {
-  return (
-    <main className="admin--container">
-      <aside className="sidebar">
-        <nav>
-          <ul>
-            <ExpandableLi
-              title="Scripts"
-              addable
-              AddComponent={() => {
-                return <span>Testing</span>;
-              }}
+    <React.Fragment>
+      <header className="p-6 bg-gray-900 text-white flex flex-row">
+        <nav className="flex flex-row ml-2">
+          <ul className="flex flex-row main--nav">
+            <li className="px-5 py-1">
+              <a href="/admin">Home</a>
+            </li>
+            <li
+              className={`px-5 py-1 ${
+                activePage == 'packages' ? 'text-blue-200 underline' : ''
+              }`}
             >
-              <ul>
-                <li className="inner--li">
-                  <span>test-script</span>
-                </li>
-              </ul>
-            </ExpandableLi>
-
-            <ExpandableLi title="NPM Packages">
-              <ul>
-                {Object.keys(packages.dependencies).map((pack) => {
-                  return (
-                    <li className="inner--li">
-                      <span>{pack}</span>
-                      <span>{packages.dependencies[pack]}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </ExpandableLi>
+              <Link href="/admin/packages">
+                <a>Packages</a>
+              </Link>
+            </li>
+            <li
+              className={`px-5 py-1 ${
+                activePage == 'scripts' ? 'text-blue-200 underline' : ''
+              }`}
+            >
+              <Link href="/admin/scripts">
+                <a>Scripts</a>
+              </Link>
+            </li>
           </ul>
         </nav>
-      </aside>
-      {children}
-    </main>
+      </header>
+      <main className="admin--container">{children}</main>
+      <footer className="p-6 bg-gray-900 text-white">
+        {publicRuntimeConfig.showFooterAttribution && (
+          <span className="w-full flex flex-row">
+            Made with{' '}
+            <span className="mx-2">
+              <FilledHeart />
+            </span>{' '}
+            by Petter Kaspersen
+          </span>
+        )}
+      </footer>
+    </React.Fragment>
   );
-}
+};

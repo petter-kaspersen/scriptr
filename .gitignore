@@ -3,3 +3,4 @@ node_modules/
 .next/
 scripts/**/*
 !scripts/.gitkeep
+.tmp

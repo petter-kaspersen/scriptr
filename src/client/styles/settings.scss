@@ -1,0 +1,11 @@
+.setting--section {
+  @apply p-2 bg-white shadow-md rounded-md;
+
+  h2 {
+    @apply font-bold uppercase text-xl;
+  }
+}
+
+.setting--section--header {
+  @apply mb-2;
+}

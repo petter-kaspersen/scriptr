@@ -12,10 +12,39 @@ const path = require('path');
 const getOrCreatePackageFile = require('../util/get-or-create-package-file');
 const addUserPackage = require('../util/add-user-package');
 
+const AdmZip = require('adm-zip');
+
 router.prefix('/api');
 
 router.get('/scripts', (ctx, next) => {
   ctx.body = getScripts();
+});
+
+router.post('/scripts/upload', (ctx, next) => {
+  try {
+    const {name, dataUrl} = ctx.request.body;
+
+    const buffer = Buffer.from(dataUrl.split(',')[1], 'base64');
+
+    const tmpPath = path.join(__dirname, '..', '..', '.tmp');
+    const scriptPath = path.join(__dirname, '..', '..', 'scripts');
+
+    const randomName = Math.floor(Math.random() * 100000) + '.zip';
+
+    fs.writeFileSync(path.join(tmpPath, randomName), buffer);
+
+    const zip = new AdmZip(path.join(tmpPath, randomName));
+
+    zip.extractAllTo(scriptPath);
+
+    ctx.body = {
+      success: true,
+    };
+  } catch (e) {
+    ctx.body = {
+      success: false,
+    };
+  }
 });
 
 router.get('/packages', (ctx, next) => {
