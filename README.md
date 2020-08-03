@@ -2,6 +2,8 @@ Scriptr is a clean, easy-to-use, easy-to-setup tool to host and administrate all
 
 Scriptr features easy setup via either 1-click DigitalOcean deployments, Docker images, or self-deployed.
 
+# !!!!! SCRIPTR IS NOT YET READY FOR USE
+
 ### Usage
 
 To use the project manually, first clone from Github.
