@@ -10,7 +10,14 @@ function routerNext(app) {
     await next();
   });
 
-  router.get('(.*)', async ctx => {
+  router.get('/admin/scripts/:name', async (ctx, next) => {
+    const {name} = ctx.params;
+
+    await handle(ctx.req, ctx.res);
+    ctx.respond = false;
+  });
+
+  router.get('(.*)', async (ctx, next) => {
     if (ctx.request.path.indexOf('/api') === 0) {
       await next();
     } else {
